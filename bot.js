@@ -1,3 +1,21 @@
+// ==UserScript==
+// @name         bot
+// @namespace    http://github.com/agarioBotDev/
+// @version      0.01
+// @description  to be writen
+// @author       David
+// @license      MIT
+// @match        http://agar.io/*
+// @require      https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.4/socket.io.min.js
+// @grant        none
+// @run-at       document-body
+// ==/UserScript==
+
+//http://agar.io/img/background.png
+
+
+
+
 var socket = io.connect('ws://127.0.0.1:8081');
 var _party = null;
 
