@@ -42,16 +42,16 @@ function emitPosition(){
 
   socket.emit("pos", {"x": x, "y": y} ); 
 }
-function emitParty() {
-    var party = window.location.pathname.split('#');
+function emitParty() {        
+    var party = window.location.href.split('#');    
     if(_party == null) {
         _party = party[1];
+        socket.emit('party', { 'party': _party });
     }
     else if (party[1] != _party) {
-        _party = party[1];
-        socket.emit('party', { 'party:' _party });    
+        _party = party[1];        
+        socket.emit('party', { 'party': _party });    
     }
-    socket.emit('party', 'test');
 }
 function emitSplit(){
   socket.emit("cmd", {"name":"split"} ); 
@@ -62,7 +62,7 @@ function emitMassEject(){
 }
 interval_id2 = setInterval(function() {
     emitParty();
-}, 500);
+}, 5000);
 interval_id = setInterval(function() {
    emitPosition();
 }, 100);
