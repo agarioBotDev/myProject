@@ -1,4 +1,5 @@
-var socket = io.connect('ws://104.236.100.252:8081');
+var socket = io.connect('ws://127.0.0.1:8081');
+var _party = null;
 
 socket.on('news', function (data) {
     console.log(data);
@@ -27,7 +28,17 @@ function emitPosition(){
 
   socket.emit("pos", {"x": x, "y": y} ); 
 }
-
+function emitParty() {
+    var party = window.location.pathname.split('#');
+    if(_party == null) {
+        _party = party[1];
+    }
+    else if (party[1] != _party) {
+        _party = party[1];
+        socket.emit('party', { 'party:' _party });    
+    }
+    socket.emit('party', 'test');
+}
 function emitSplit(){
   socket.emit("cmd", {"name":"split"} ); 
 }
@@ -35,7 +46,9 @@ function emitSplit(){
 function emitMassEject(){
   socket.emit("cmd", {"name":"eject"} );    
 }
-
+interval_id2 = setInterval(function() {
+    emitParty();
+}, 500);
 interval_id = setInterval(function() {
    emitPosition();
 }, 100);
